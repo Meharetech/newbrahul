@@ -39,7 +39,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: ['https://bloodbackend-7sbc.onrender.com'],
+  origin: ['https://bloodbackend-7sbc.onrender.com', 'https://thebloodhero.com', 'http://thebloodhero.com', 'http://localhost:3000', 'http://localhost:3012'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
