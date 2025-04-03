@@ -42,7 +42,7 @@ app.use(cors({
   origin: ['https://bloodbackend-7sbc.onrender.com', 'https://thebloodhero.com', 'http://thebloodhero.com', 'http://localhost:3000', 'http://localhost:3012'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-auth-token', '*']
 }));
 
 // Add a middleware to handle preflight requests and set proper headers
@@ -53,7 +53,13 @@ app.use((req, res, next) => {
   }
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, x-auth-token, *');
+  
+  // Handle preflight OPTIONS requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
   next();
 });
 app.use(express.json({ limit: '50mb' }));
