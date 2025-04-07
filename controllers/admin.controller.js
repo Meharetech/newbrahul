@@ -28,6 +28,7 @@ exports.login = async (req, res) => {
     // Verify password
     const isMatch = password === adminPassword;
     if (!isMatch) {
+      console.log('Password mismatch. Provided:', password, 'Expected:', adminPassword);
       return res.status(401).json({ message: 'Invalid admin credentials' });
     }
 
